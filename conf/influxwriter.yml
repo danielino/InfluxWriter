@@ -1,0 +1,15 @@
+influxdb:
+  data:
+    hosts:
+      - host: influxdb
+        port: 8086
+        username: influxdb
+        password: influxdb
+        database: mydb
+  stats:
+    hosts:
+      - host: 127.0.0.1
+        port: 8086
+        username: influxdb
+        password: influxdb
+        database: mydb

@@ -1,0 +1,66 @@
+version: '3.4'
+
+services:
+  influxdb:
+    image: influxdb:latest
+    volumes:
+      - influxdata:/var/lib/influxdb
+    networks:
+      - databases
+    environment:
+      INFLUXDB_DB: mydb
+      INFLUXDB_USER: influxdb
+      INFLUXDB_USER_PASSWORD: influxdb
+
+  chronograf:
+    image: chronograf:latest
+    volumes:
+      - chronografdata:/var/lib/chronograf
+    networks:
+      - databases
+    ports:
+      - 8888:8888
+    depends_on:
+      - influxdb
+
+  redis:
+    image: redis:latest
+    volumes:
+      - redisdata:/data
+    networks:
+      - databases
+
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    networks:
+      - databases
+    ports: 
+      - 15678:15672
+
+  writer:
+    image: influxwriter:latest
+    environment:
+      REDIS_HOST: redis
+      RABBIT_HOST: rabbitmq
+      RABBIT_PORT: 5672
+      RABBIT_USER: guest
+      RABBIT_PASS: guest
+      RABBIT_VHOST: '/'
+    networks:
+      - databases
+    ports:
+      - 8000:8000
+    depends_on:
+      - influxdb
+      - redis
+      - rabbitmq 
+
+
+networks:
+  databases:
+
+volumes:
+  influxdata:
+  chronografdata:
+  redisdata:

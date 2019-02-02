@@ -1,0 +1,13 @@
+AMQP_URI: amqp://${RABBIT_USER}:${RABBIT_PASSWORD}@${RABBIT_HOST}:${RABBIT_PORT}/${RABBIT_VHOST}
+max_workers: 10
+requeue_on_error: true
+WEB_SERVER_ADDRESS: '0.0.0.0:8000'
+
+LOGGING:
+  version: 1
+  handlers:
+    console:
+      class: logging.StreamHandler
+  root:
+    level: DEBUG
+    handlers: [console]

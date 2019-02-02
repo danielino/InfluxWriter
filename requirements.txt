@@ -1,0 +1,7 @@
+nameko
+nameko-amqp-retry
+nameko-structlog
+influxdb
+redis
+requests
+pyyaml
