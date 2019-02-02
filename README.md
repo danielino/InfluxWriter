@@ -37,6 +37,24 @@ write can be sent as rabbitmq message or by http post request
 ]
 ```
 
+## Configuration
+
+to configure the influxdb backend database, you can modify conf/influxwriter.yml
+
+```yaml
+influxdb:
+  data:
+    hosts:
+      - host: influxdb
+        port: 8086
+        username: influxdb
+        password: influxdb
+        database: mydb
+      - host: xxx
+        port: yyy
+        ...
+```
+
 ## Deploy
 
 docker-compose provide:
